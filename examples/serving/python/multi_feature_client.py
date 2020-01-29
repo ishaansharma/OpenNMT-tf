@@ -12,8 +12,9 @@ class Translator(object):
     def __init__(self, export_dir):
         imported = tf.saved_model.load(export_dir)
         self._translate_fn = imported.signatures["serving_default"]
-        self._tokenizer = pyonmttok.Tokenizer("none",joiner_annotate=True, segment_numbers=True)#https://github.com/OpenNMT/Tokenizer/tree/master/bindings/python
-        #tokens = tokenizer.tokenize(text: str)
+	#https://github.com/OpenNMT/Tokenizer/blob/1ae0877a733268c9a3ef5fc063d4c1f0b6dfe2f7/docs/options.md
+        self._tokenizer = pyonmttok.Tokenizer("conservative", joiner_annotate=True, segment_numbers=True)#https://github.com/OpenNMT/Tokenizer/tree/master/bindings/python
+ 
 
     def translate(self, src, fea1, fea2):
         """Translates a batch of texts."""
